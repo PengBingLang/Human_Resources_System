@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>欢迎页面</title>
+
+		<style type="text/css">
+			body {
+				background: url("img/welcome.jpg");
+				background-size: 100% auto;
+			}
+		</style>
+	</head>
+
+	<body>
+	</body>
+
+</html>

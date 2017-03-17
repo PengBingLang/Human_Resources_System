@@ -1,0 +1,70 @@
+package dao;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class DBManager {
+
+	private static final String USERNAME = "root";
+	private static final String PWD = "";
+	private static final String URL = "jdbc:mysql://192.168.10.54:3306/Human_Resources_System";
+	private static final String DRIVER = "com.mysql.jdbc.Driver";
+
+	/**
+	 * 得到数据库连接
+	 * 
+	 * @return *彭秉浪*
+	 */
+	public Connection getConnection() {
+		Connection conn = null;
+		try {
+			Class.forName(DRIVER);
+			conn = DriverManager.getConnection(URL, USERNAME, PWD);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return conn;
+	}
+
+	/**
+	 * 关闭所有连接
+	 * 
+	 * @param rs
+	 * @param ps
+	 * @param conn
+	 *            *彭秉浪*
+	 */
+	public void closeAll(ResultSet rs, PreparedStatement ps, Connection conn) {
+		if (rs != null) {
+			try {
+				rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		if (ps != null) {
+			try {
+				ps.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		if (conn != null) {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+}

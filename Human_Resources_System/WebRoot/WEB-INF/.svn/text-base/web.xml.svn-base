@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+
+	<!-- 过滤器，将所有页面的编码格式全部设置 -->
+	<filter>
+		<filter-name>characterEncoding</filter-name>
+		<filter-class>filter.EncodingFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>characterEncoding</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<!-- 用于判断用户访问时是否登录 -->
+	<filter>
+		<filter-name>TestFilter</filter-name>
+		<filter-class>filter.TestFilter</filter-class>
+		<init-param>
+			<param-name>chain</param-name>
+			<param-value>login,Login,a</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>TestFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<!-- 监听器测试ab -->
+	<!-- <filter> <filter-name>a</filter-name> <filter-class>filter.FilterA</filter-class> 
+		</filter> <filter-mapping> <filter-name>a</filter-name> <url-pattern>/test</url-pattern> 
+		</filter-mapping> <filter> <filter-name>b</filter-name> <filter-class>filter.FilterB</filter-class> 
+		</filter> <filter-mapping> <filter-name>b</filter-name> <url-pattern>/test</url-pattern> 
+		</filter-mapping> -->
+
+	<!-- 登录验证的Servlet -->
+	<servlet>
+		<servlet-name>LoginServlet</servlet-name>
+		<servlet-class>employee.LoginServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LoginServlet</servlet-name>
+		<url-pattern>/servlet/LoginServlet</url-pattern>
+	</servlet-mapping>
+
+	<!-- 退出登录的Servlet -->
+	<servlet>
+		<servlet-name>OffLine</servlet-name>
+		<servlet-class>employee.OffLine</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>OffLine</servlet-name>
+		<url-pattern>/servlet/OffLine</url-pattern>
+	</servlet-mapping>
+
+	<!-- 处理签到请求的Servlet -->
+	<servlet>
+		<servlet-name>AttendanceServlet</servlet-name>
+		<servlet-class>employee.AttendanceServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AttendanceServlet</servlet-name>
+		<url-pattern>/servlet/AttendanceServlet</url-pattern>
+	</servlet-mapping>
+
+	<!-- 查询通知的Servlet -->
+	<servlet>
+		<servlet-name>AdviceServlet</servlet-name>
+		<servlet-class>employee.AdviceServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>AdviceServlet</servlet-name>
+		<url-pattern>/servlet/AdviceServlet</url-pattern>
+	</servlet-mapping>
+
+	<!-- 修改和找回密码 -->
+	<servlet>
+		<servlet-name>PwdChangeServlet</servlet-name>
+		<servlet-class>employee.PwdChangeServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PwdChangeServlet</servlet-name>
+		<url-pattern>/servlet/PwdChangeServlet</url-pattern>
+	</servlet-mapping>
+	
+	<!-- 验证码 -->
+	<servlet>
+		<servlet-name>CheckCodeServlet</servlet-name>
+		<servlet-class>employee.CheckCodeServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CheckCodeServlet</servlet-name>
+		<url-pattern>/servlet/CheckCodeServlet</url-pattern>
+	</servlet-mapping>
+	<!-- 结束 -->
+</web-app>

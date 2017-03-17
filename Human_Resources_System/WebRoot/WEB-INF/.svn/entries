@@ -1,0 +1,43 @@
+8
+
+dir
+2
+http://192.168.10.63/svn/PengBingLang/Human_Resources_System/WebRoot/WEB-INF
+http://192.168.10.63/svn/PengBingLang
+
+
+
+2017-01-09T01:14:22.992308Z
+2
+pengbinglang
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+495dd7f1-436d-d545-afc1-3edd7495b7cb
+
+lib
+dir
+
+web.xml
+file
+
+
+
+
+2017-01-09T00:56:15.924000Z
+9cd7d9a924dead23c564785c8d6ef49f
+2017-01-09T01:14:22.992308Z
+2
+pengbinglang
+

@@ -1,0 +1,61 @@
+8
+
+dir
+1
+http://192.168.10.63/svn/PengBingLang/Human_Resources_System
+http://192.168.10.63/svn/PengBingLang
+
+
+
+2017-01-09T01:14:06.252457Z
+1
+pengbinglang
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+495dd7f1-436d-d545-afc1-3edd7495b7cb
+
+.classpath
+file
+2
+
+
+
+2017-01-05T07:53:14.994000Z
+ae899e8a9f5174c8a2110ebd92079e60
+2017-01-09T01:14:22.992308Z
+2
+pengbinglang
+
+.project
+file
+2
+
+
+
+2017-01-05T11:28:29.878000Z
+76d260cd424ab6e73c3f01b984d6889c
+2017-01-09T01:14:22.992308Z
+2
+pengbinglang
+
+.settings
+dir
+
+WebRoot
+dir
+
+src
+dir
+

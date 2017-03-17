@@ -1,0 +1,101 @@
+package employee;
+
+import java.util.List;
+
+import util.SQLFilter;
+import dao.Dao;
+import entity.EmployeeLogin;
+import entity.employeeInfoTab;
+import entity.informTabView;
+
+public class EmployeeService {
+
+	private Dao dao = new Dao();
+
+	/**
+	 * 判断是否登录成功，返回员工信息
+	 * 
+	 * @param employee
+	 * @return *彭秉浪*
+	 */
+	public EmployeeLogin login(EmployeeLogin employeeLogin) {
+		String sql = "select * from employeeInfoTab where employeeNumber='{employeeNumber}' and employeePwd='{employeePwd}'";
+		sql = SQLFilter.filter(sql, employeeLogin);
+		List list = dao.executeQuery(sql, EmployeeLogin.class);
+		if (list.size() > 0) {
+			return (EmployeeLogin) list.get(0);
+		} else {
+			return null;
+		}
+	}
+
+	/**
+	 * 修改密码
+	 * 
+	 * @param user
+	 * @param pwd
+	 * @return *彭秉浪*
+	 */
+	public boolean setPwd(String user, String pwd) {
+		String sql = "update employeeInfoTab set employeePwd =" + pwd + " where employeeNumber =" + user;
+		int i = dao.executeUpdate(sql);
+		if (i > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	/**
+	 * 根据个人信息，找回密码
+	 * 
+	 * @param employee
+	 * @return *彭秉浪*
+	 */
+	public String getPwd(employeeInfoTab employee) {
+		String sql = "select employeePwd from employeeInfoTab where employeeNumber='{employeeNumber}' and employeeName='{employeeName}' and employeeID='{employeeID}' and employeeGender='{employeeGender}' and employeeTel='{employeeTel}' and employeeOutTime='{employeeOutTime}'";
+		sql = SQLFilter.filter(sql, employee);
+
+		System.out.println(sql);
+
+		List list = dao.executeQuery(sql, employeeInfoTab.class);
+		if (list.size() > 0) {
+			String pwd = ((EmployeeLogin) list.get(0)).getEmployeePwd();
+			return pwd;
+		} else {
+			return "个人信息有误，密码找回失败！";
+		}
+	}
+
+	/**
+	 * 写入签到数据
+	 * 
+	 * @param employeeLogin
+	 * @param type
+	 * @param time
+	 * @return *彭秉浪*
+	 */
+	public boolean writeAttendance(EmployeeLogin employeeLogin, String type, String time) {
+		String sql = "insert into attendanceInfoTab(employeeNumber,attendanceDate,attendanceType) values('{employeeNumber}','"
+				+ time + "','" + type + "')";
+		sql = SQLFilter.filter(sql, employeeLogin);
+		int i = dao.executeUpdate(sql);
+		if (i > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	/**
+	 * 查询截止日期大于今天的通知
+	 * 
+	 * @return *彭秉浪*
+	 */
+	public List getAdvice() {
+		String sql = "select employeeInfoTab.employeeName,DATE_FORMAT(informTab.informTime,'%Y-%m-%d') as informTime,DATE_FORMAT(informTab.informValidityEnd,'%Y-%m-%d') as informValidityEnd,informTab.informInfo from informTab join employeeInfoTab on informTab.employeeNumber = employeeInfoTab.employeeNumber where informTab.informValidityEnd > now()";
+		List list = dao.executeQuery(sql, informTabView.class);
+		return list;
+	}
+
+}

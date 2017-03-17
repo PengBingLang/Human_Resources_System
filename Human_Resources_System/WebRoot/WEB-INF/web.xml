@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+
+	<!-- 过滤器，将所有页面的编码格式全部设置 -->
+	<filter>
+		<filter-name>characterEncoding</filter-name>
+		<filter-class>filter.EncodingFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>characterEncoding</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<!-- 用于判断用户访问时是否登录 -->
+	<filter>
+		<filter-name>TestFilter</filter-name>
+		<filter-class>filter.TestFilter</filter-class>
+		<init-param>
+			<param-name>chain</param-name>
+			<param-value>login,Login,a</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>TestFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<!-- 监听器测试ab -->
+	<!-- <filter> <filter-name>a</filter-name> <filter-class>filter.FilterA</filter-class> 
+		</filter> <filter-mapping> <filter-name>a</filter-name> <url-pattern>/test</url-pattern> 
+		</filter-mapping> <filter> <filter-name>b</filter-name> <filter-class>filter.FilterB</filter-class> 
+		</filter> <filter-mapping> <filter-name>b</filter-name> <url-pattern>/test</url-pattern> 
+		</filter-mapping> -->
+
+	<!-- 可以通过修改配置文件来达到修改代码的效果 -->
+	<context-param>
+		<!-- 上下文参数 -->
+		<param-name>encoding</param-name>
+		<param-value>UTF-8</param-value>
+	</context-param>
+
+	<!-- 登录验证的Servlet -->
+	<servlet>
+		<servlet-name>LoginServlet</servlet-name>
+		<servlet-class>employee.LoginServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LoginServlet</servlet-name>
+		<url-pattern>/servlet/LoginServlet</url-pattern>
+	</servlet-mapping>
+
+	<!-- 退出登录的Servlet -->
+	<servlet>
+		<servlet-name>OffLine</servlet-name>
+		<servlet-class>employee.OffLine</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>OffLine</servlet-name>
+		<url-pattern>/servlet/OffLine</url-pattern>
+	</servlet-mapping>
+
+	<!-- 处理签到请求的Servlet -->
+	<servlet>
+		<servlet-name>AttendanceServlet</servlet-name>
+		<servlet-class>employee.AttendanceServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AttendanceServlet</servlet-name>
+		<url-pattern>/servlet/AttendanceServlet</url-pattern>
+	</servlet-mapping>
+
+	<!-- 修改和找回密码 -->
+	<servlet>
+		<servlet-name>PwdChangeServlet</servlet-name>
+		<servlet-class>employee.PwdChangeServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PwdChangeServlet</servlet-name>
+		<url-pattern>/servlet/PwdChangeServlet</url-pattern>
+	</servlet-mapping>
+
+	<!-- 验证码 -->
+	<servlet>
+		<servlet-name>CheckCodeServlet</servlet-name>
+		<servlet-class>employee.CheckCodeServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CheckCodeServlet</servlet-name>
+		<url-pattern>/servlet/CheckCodeServlet</url-pattern>
+	</servlet-mapping>
+
+	<!-- 个人工资查询的Servlet -->
+	<servlet>
+		<servlet-name>SalaryServlet</servlet-name>
+		<servlet-class>employee.SalaryServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SalaryServlet</servlet-name>
+		<url-pattern>/servlet/SalaryServlet</url-pattern>
+	</servlet-mapping>
+
+	<!-- 查询通知的Servlet -->
+	<servlet>
+		<servlet-name>AdviceServlet</servlet-name>
+		<servlet-class>employee.AdviceServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AdviceServlet</servlet-name>
+		<url-pattern>/servlet/AdviceServlet</url-pattern>
+	</servlet-mapping>
+
+	<!-- 发布通知的Servlet -->
+	<servlet>
+		<servlet-name>AddAdvice</servlet-name>
+		<servlet-class>admin.AddAdvice</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AddAdvice</servlet-name>
+		<url-pattern>/servlet/AddAdvice</url-pattern>
+	</servlet-mapping>
+
+	<!-- 添加请假信息的Servlet -->
+	<servlet>
+		<servlet-name>AddLeave</servlet-name>
+		<servlet-class>admin.AddLeave</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AddLeave</servlet-name>
+		<url-pattern>/servlet/AddLeave</url-pattern>
+	</servlet-mapping>
+
+	<!-- 查询全部考勤统计信息 -->
+	<servlet>
+		<servlet-name>GetAllAttendance</servlet-name>
+		<servlet-class>admin.GetAllAttendance</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>GetAllAttendance</servlet-name>
+		<url-pattern>/servlet/GetAllAttendance</url-pattern>
+	</servlet-mapping>
+
+	<!-- 员工信息修改添加 -->
+	<servlet>
+		<servlet-name>SetEmployee</servlet-name>
+		<servlet-class>admin.SetEmployee</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SetEmployee</servlet-name>
+		<url-pattern>/servlet/SetEmployee</url-pattern>
+	</servlet-mapping>
+
+	<!-- 考勤统计与工资计算 -->
+	<servlet>
+		<servlet-name>CountSalary</servlet-name>
+		<servlet-class>admin.CountSalary</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CountSalary</servlet-name>
+		<url-pattern>/servlet/CountSalary</url-pattern>
+	</servlet-mapping>
+	
+	<!-- 考勤统计servlet is start -->
+  <servlet>
+    <servlet-name>AttendanceCount</servlet-name>
+    <servlet-class>attendance.AttendanceCount</servlet-class>
+  </servlet>
+   <servlet-mapping>
+    <servlet-name>AttendanceCount</servlet-name>
+    <url-pattern>/servlet/AttendanceCount</url-pattern>
+  </servlet-mapping>
+  
+  
+<!-- 考勤统计servlet is end -->
+<!-- 考勤统计工号是否存在 is start -->
+ <servlet>
+    <servlet-name>CheckEmployeeNumber</servlet-name>
+    <servlet-class>attendance.CheckEmployeeNumber</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CheckEmployeeNumber</servlet-name>
+    <url-pattern>/servlet/CheckEmployeeNumber</url-pattern>
+  </servlet-mapping>
+<!-- 考勤统计工号是否存在 is end -->
+
+<!-- change in 2017年1月11日23:16:55 -->
+<!-- 设置职称 servlet is start -->
+  <servlet>
+    <servlet-name>SetRankServlet</servlet-name>
+    <servlet-class>admin.SetRankServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>SetRankServlet</servlet-name>
+    <url-pattern>/servlet/SetRankServlet</url-pattern>
+  </servlet-mapping>
+  <!-- 设置职称 servlet is end -->
+  <!-- 设置部门 servlet is start -->
+  <servlet>
+    <servlet-name>SetDepartmentServlet</servlet-name>
+    <servlet-class>admin.SetDepartmentServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>SetDepartmentServlet</servlet-name>
+    <url-pattern>/servlet/SetDepartmentServlet</url-pattern>
+  </servlet-mapping>
+ <!-- 设置职称 servlet is end -->
+ <!-- 帮助信息start -->
+  <servlet>
+    <servlet-name>HelpServlet</servlet-name>
+    <servlet-class>help.HelpServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>HelpServlet</servlet-name>
+    <url-pattern>/servlet/HelpServlet</url-pattern>
+  </servlet-mapping>
+  <!-- 帮助信息end -->
+  <!-- 数据导出 -->
+  <servlet>
+    <servlet-name>ReportTabServlet</servlet-name>
+    <servlet-class>admin.ReportTabServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ReportTabServlet</servlet-name>
+    <url-pattern>/servlet/ReportTabServlet</url-pattern>
+  </servlet-mapping>
+
+	<!-- 结束 -->
+</web-app>
